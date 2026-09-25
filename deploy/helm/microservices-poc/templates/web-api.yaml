@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-api
+  labels:
+    app.kubernetes.io/name: web-api
+    app.kubernetes.io/instance: {{ .Release.Name }}
+spec:
+  replicas: {{ .Values.webApi.replicas }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: web-api
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: web-api
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: web-api
+          image: "{{ .Values.webApi.image.repository }}:{{ .Values.webApi.image.tag }}"
+          imagePullPolicy: {{ .Values.webApi.image.pullPolicy }}
+          env:
+            - name: BIND_ADDRESS
+              value: "0.0.0.0"
+            - name: PORT
+              value: "8081"
+            - name: EXAMPLE_SERVICE_URL
+              value: "http://example-service:8082"
+          ports:
+            - name: http
+              containerPort: 8081
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+          resources:
+            {{- toYaml .Values.webApi.resources | nindent 12 }}
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: [ALL]
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-api
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: web-api
+    app.kubernetes.io/instance: {{ .Release.Name }}
+  ports:
+    - name: http
+      port: 8081
+      targetPort: http
