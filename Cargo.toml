@@ -1,0 +1,13 @@
+[workspace]
+resolver = "2"
+members = ["services/example-service", "services/web-api"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+
+[workspace.dependencies]
+axum = "0.8"
+serde = { version = "1", features = ["derive"] }
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "net"] }

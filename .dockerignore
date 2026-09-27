@@ -1,0 +1,10 @@
+.git
+target
+web/node_modules
+web/dist
+web/coverage
+web/test-results
+web/playwright-report
+*.log
+.env
+.env.*

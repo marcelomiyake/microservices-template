@@ -1,0 +1,54 @@
+openapi: 3.1.0
+info:
+  title: Microservices PoC example HTTP contract
+  version: 0.1.0
+  description: Local starter endpoints. Replace when adopting this template.
+servers:
+  - url: http://127.0.0.1:8081
+    description: Local web API
+paths:
+  /api/example:
+    get:
+      operationId: getBrowserExample
+      summary: Return the example message through the web API
+      responses:
+        '200':
+          description: Example response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExampleResponse'
+        '502':
+          description: Downstream service unavailable or invalid response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /example:
+    get:
+      operationId: getServiceExample
+      summary: Return the example service's owned message
+      servers:
+        - url: http://127.0.0.1:8082
+          description: Local example service
+      responses:
+        '200':
+          description: Example response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExampleResponse'
+components:
+  schemas:
+    ExampleResponse:
+      type: object
+      required: [message]
+      properties:
+        message:
+          type: string
+    ErrorResponse:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: string

@@ -1,0 +1,6 @@
+apiVersion: v2
+name: microservices-poc
+description: Local Kind deployment for the Rust and Vue PoC starter
+type: application
+version: 0.1.0
+appVersion: "0.1.0"

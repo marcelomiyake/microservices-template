@@ -1,0 +1,20 @@
+[package]
+name = "web-api"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[package.metadata.sonar]
+organization = "marcelomiyake"
+project-key = "marcelomiyake_microservices-template_web-api"
+inclusions = ["**/*.rs"]
+exclusions = ["target/**"]
+
+[dependencies]
+axum.workspace = true
+reqwest = { version = "0.12", default-features = false, features = ["json", "rustls-tls"] }
+serde.workspace = true
+tokio.workspace = true
+
+[dev-dependencies]
+tower = { version = "0.5", features = ["util"] }
