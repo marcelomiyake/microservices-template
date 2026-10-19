@@ -31,7 +31,7 @@ Each component has its own README and scoped `AGENTS.md`. `CLAUDE.md` imports th
 ## Prerequisites
 
 - **Build and deploy:** Docker, Kind, kubectl, Helm 3 or 4, Rust 1.98.1 with Cargo, Node.js 22.12 or newer, and npm. The Rust toolchain includes `rustfmt` and `clippy`. Create or select a local Kind cluster named `kind` with context `kind-kind`.
-- **Quality tooling:** `cargo-llvm-cov` for Rust coverage and Playwright Chromium for browser E2E. SonarQube Cloud is connected to GitHub and analyzes pushes and pull requests automatically. OpenDesign is a separate design-time app; Jev requires an authorized `TYPESAFE_API_KEY` for its advisory assessment.
+- **Quality tooling:** `cargo-llvm-cov` for Rust coverage and Playwright Chromium for browser E2E. SonarQube Cloud is connected to GitHub and analyzes pushes and pull requests automatically. OpenDesign is a separate design-time app; [Jev](https://docs.typesafe.ai/introduction/coding-agents), TypeSafe's model for typed rubric scores, requires an authorized `TYPESAFE_API_KEY` for its advisory assessment.
 - **Use:** the deployed Kind release, a browser, and a loopback port forward. No account, database, or secret is needed.
 
 ## Deploy to Kind
