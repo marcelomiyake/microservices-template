@@ -1,0 +1,11 @@
+{
+  "policy": "Use a Sonar project for each real component; retain existing aggregate history.",
+  "projects": [
+    {
+      "component": "web",
+      "directory": "web",
+      "key": "marcelomiyake_microservices-template_web",
+      "kind": "web"
+    }
+  ]
+}
